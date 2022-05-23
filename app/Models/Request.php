@@ -10,6 +10,6 @@ class Request extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type' , 'description' , 'user_id' , 'is_hidden'
-     ];
+        'type' , 'is_hidden' , 'user_id' , 'description'
+       ];
 }
