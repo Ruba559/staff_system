@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('index');
+
+Route::get('/terms-and-conditions',[HomeController::class,'terms'])->name('terms');
+Route::get('/privacy-policy',[HomeController::class,'privacy'])->name('privacy');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
