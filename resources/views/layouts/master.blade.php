@@ -33,10 +33,11 @@
 	<!-- Favicon  -->
     <link rel="icon" href="images/favicon.png">
 </head>
-<body>
 
+<body>
+<div class="container-fluid">
     <!-- Navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+    <nav id="navbar" class="navbar navbar-expand-lg {{-- fixed-top --}} navbar-light" aria-label="Main navigation">
         <div class="container">
 
             <!-- Image Logo -->
@@ -49,7 +50,7 @@
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     <li class="nav-item">
-                        <a class="nav-link active anchor-c" aria-current="page" href="#header">Home</a>
+                        <a class="nav-link active anchor-c" aria-current="page" href="{{route('index')}}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link anchor-c" href="#details">Details</a>
@@ -75,6 +76,7 @@
         </div> <!-- end of container -->
     </nav> <!-- end of navbar -->
     <!-- end of navigation -->
+</div>
 
 @yield('body')
 

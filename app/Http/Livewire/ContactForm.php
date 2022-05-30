@@ -7,7 +7,8 @@ use Livewire\Component;
 
 class ContactForm extends Component
 {
-    public $name;
+
+    public $name ;
     public $email;
     public $message;
 
@@ -18,9 +19,12 @@ class ContactForm extends Component
             'email' => 'required|email',
             'message' => 'required',
         ]);
+        
         ContactU::create($data);
 
+        $this->reset();
 
+        session()->flash('message', 'Send success');
 
     }
     public function render()
