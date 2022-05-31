@@ -5,10 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use Illuminate\Support\Facades\Validator;
+use App\Jobs\Remind;
+use App\Models\User;
+use App\Notifications\RemindNotify;
+use Illuminate\Support\Facades\Notification;
 
 class TaskController extends Controller
 {
     
+    public function sendRemind()
+    {
+        
+        $id = Task::where('task_date' , now()->format('Y-m-d'))->pluck('user_id');
+        
+        $user=  User::find($id);
+
+        Notification::send($user , new RemindNotify());
+
+        return'm';
+    }
+
     public function index()
     {
         $task = Task::select('title' , 'specified_time')->paginate(3);

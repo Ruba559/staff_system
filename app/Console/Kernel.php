@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\Reminder;
+use App\Jobs\remindJob;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+       \App\Console\Commands\Reminder::class,
+      \App\Console\Commands\CronJob,
     ];
 
     /**
@@ -24,7 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('reminder:name')->everyMinute();
+       // $schedule->job(new remindJob)->everyMinute();
+     
     }
 
     /**
