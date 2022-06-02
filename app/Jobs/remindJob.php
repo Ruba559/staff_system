@@ -8,6 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Notifications\RemindNotify;
+use Illuminate\Support\Facades\Notification;
+use App\Models\Task;
+use App\Models\User;
 
 class remindJob implements ShouldQueue
 {
@@ -18,9 +22,10 @@ class remindJob implements ShouldQueue
      *
      * @return void
      */
+
     public function __construct()
     {
-        //
+        
     }
 
     /**
@@ -30,7 +35,7 @@ class remindJob implements ShouldQueue
      */
     public function handle()
     {
-        $id = Task::where('task_date' , now()->format('Y-m-d'))->pluck('user_id');
+        $id = Task::where('remind_date')->pluck('user_id');
         
         $user=  User::find($id);
 

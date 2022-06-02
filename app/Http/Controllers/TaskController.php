@@ -5,24 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use Illuminate\Support\Facades\Validator;
-use App\Jobs\Remind;
+use App\Jobs\remindJob;
 use App\Models\User;
 use App\Notifications\RemindNotify;
 use Illuminate\Support\Facades\Notification;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
     
     public function sendRemind()
     {
+        $date = Task::where('remind_date' , now()->format('Y-m-d'))->pluck('created_at');
+        $time = Task::where('remind_time' , now()->format('h:i'))->pluck('remind_time');
+      // return $date;
+    return  Carbon::now()->format('m');
+   return   Carbon::now('m d');
+   return   $date->format('m');
         
-        $id = Task::where('task_date' , now()->format('Y-m-d'))->pluck('user_id');
-        
-        $user=  User::find($id);
-
-        Notification::send($user , new RemindNotify());
-
-        return'm';
+       return $month = Carbon::createFromFormat('d/m/Y', $date)->format('m');
+     return   $date->date("m");
+      return $date->format('H:i d, M Y');
+      
+        $day = $date->format('m');
+       return $day;
+      //    $time = Carbon::createFromTimestamp($time);
+    
+          $cron = $time->minute. ' '. $time->hour . ' ' . $time->day .' ' . $time->month .' * ';
+         
+        return $cron;
     }
 
     public function index()

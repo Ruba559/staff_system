@@ -21,8 +21,9 @@ class CreateTasksTable extends Migration
             $table->integer('user_id');
             $table->tinyInteger('is_executed');
             $table->string('file');
-            $table->date('task_date');
-            $table->time('task_time');
+            $table->date('remind_date');
+            $table->time('remind_time');
+            $table->integer('remind_repeat');
             $table->timestamps();
         });
     }
