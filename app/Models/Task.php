@@ -10,12 +10,17 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-       'title' , 'specified_time' , 'project_id' , 'user_id'
+       'title' , 'specified_time' , 'project_id' , 'user_id' , 'is_executed' , 'remind_date' , 'remind_time' , 'remind_repeat' , 'file'
      ];
         
               
      public function project()
      {
        return $this->belongsTo(Project::class);
+     }
+
+     public function user()
+     {
+       return $this->belongsTo(User::class);
      }
 }

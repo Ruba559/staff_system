@@ -22,10 +22,11 @@ class remindJob implements ShouldQueue
      *
      * @return void
      */
+  
 
     public function __construct()
     {
-        
+       
     }
 
     /**
@@ -35,10 +36,16 @@ class remindJob implements ShouldQueue
      */
     public function handle()
     {
-        $id = Task::where('remind_date' , now()->format('Y-m-d'))->where('remind_time' , now()->format('h:i'))->pluck('user_id');
         
-        $user=  User::find($id);
+        $id = Task::where('remind_date' , now()->format('Y-m-d'))->where('remind_time' , now()->format('h:i'))->pluck('user_id');
+       
+        if($id)
+        {
+           $user=  User::find($id);
 
-        Notification::send($user , new RemindNotify());
+           Notification::send($user , new RemindNotify());
+
+        }else
+        return;
     }
 }

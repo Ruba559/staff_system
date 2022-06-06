@@ -10,45 +10,22 @@ use App\Models\User;
 use App\Notifications\RemindNotify;
 use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon;
+use App\Http\Resources\TaskResource;
 
 class TaskController extends Controller
 {
     
     public function sendRemind()
     {
-
-
-        $id = Task::where('remind_date' , now()->format('Y-m-d'))->where('remind_time' , now()->format('h:i'))->pluck('user_id');
-        return $id;
-      //  $id = Task::where('remind_date' , now()->format('Y-m-d'))->pluck('user_id');
-        
-        $user=  User::find($id); return $user;
-        $date = Task::where('remind_date' , now()->format('Y-m-d'))->pluck('remind_date');
-        $time = Task::where('remind_time' , now()->format('h:i'))->pluck('remind_time');
-       // $day = $date->format('m');
-//     return  Carbon::now()->format('m');
-//    return   Carbon::now('m d');
-//    return   $date->format('m');
-        
-//        return $month = Carbon::createFromFormat('d/m/Y', $date)->format('m');
-//      return   $date->date("m");
-//       return $date->format('H:i d, M Y');
-      
-      
-//        return $day;
-      //    $time = Carbon::createFromTimestamp($time);
-
         return  $cron = Carbon::now()->format('i'). ' '. Carbon::now()->format('H') . ' ' . Carbon::now()->format('d') .' ' . Carbon::now()->format('m') .' * ';
-         // $cron = $time->minute. ' '. $time->hour . ' ' . $time->day .' ' . $time->month .' * ';
          
         return $cron;
     }
 
     public function index()
     {
-        $task = Task::select('title' , 'specified_time')->paginate(3);
-        
-        return response()->json($task);
+        return  TaskResource::collection(Task::paginate(3));
+     
     }
 
     
@@ -108,7 +85,7 @@ class TaskController extends Controller
        
         $task->save();
 
-        return $this -> returnSuccessMessage('Successful');
+        return response($task, 201);
     }
 
    
@@ -146,7 +123,7 @@ class TaskController extends Controller
 
             $task->update($request->all());
 
-        return $this -> returnSuccessMessage('Successful');
+            return response($task, 201);
         
     }
 
@@ -165,7 +142,7 @@ class TaskController extends Controller
 
          $task->delete();
  
-         return $this -> returnSuccessMessage('Successful' , '200');
+         return response($task, 201);
          }
        
     }

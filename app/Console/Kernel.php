@@ -37,11 +37,11 @@ class Kernel extends ConsoleKernel
 
         // $schedule->call(function(){
         //     \App\Jobs\remindJob::dispatch();
-        //  })
 
-     
-   
-      $schedule->job(new remindJob)->timezone('Asia/Damascus')->everyMinute();
+        //  })->timezone('Asia/Damascus')->everyMinute();
+
+       
+       $schedule->job(new remindJob)->timezone('Asia/Damascus')->everyFifteenMinutes();
         
      
     }
