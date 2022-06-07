@@ -12,8 +12,8 @@ class Task extends Model
     protected $fillable = [
        'title' , 'specified_time' , 'project_id' , 'user_id' , 'is_executed' , 'remind_date' , 'remind_time' , 'remind_repeat' , 'file'
      ];
-        
-              
+
+
      public function project()
      {
        return $this->belongsTo(Project::class);
@@ -23,4 +23,14 @@ class Task extends Model
      {
        return $this->belongsTo(User::class);
      }
+
+     public function manager()
+     {
+         return $this->belongsTo(User::class, 'manager_id');
+     }
+     public function steps()
+     {
+         return $this->hasMany(Step::class, 'task_id', 'id');
+     }
+
 }

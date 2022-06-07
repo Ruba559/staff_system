@@ -19,11 +19,12 @@ class TaskResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'specified_time' => $this->specified_time,
-            'project_id' => new ProductResource($this->project),
-            'user_id' => new UserResource($this->user),
+            'project' => new ProjectResource($this->project),
+            'user' => new UserResource($this->user),
+            'manager' => new UserResource($this->manager),
             'is_executed' => $this->is_executed,
             'file' => $this->file,
-            
+            'steps'=> StepResource::collection($this->steps)
         ];
     }
 }
